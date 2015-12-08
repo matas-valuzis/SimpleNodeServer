@@ -4,7 +4,7 @@
 
 ## Run
 
-nmp start
+npm start
 
 ## To use
 
