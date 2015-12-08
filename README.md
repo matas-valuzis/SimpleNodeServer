@@ -12,7 +12,7 @@ Place html/js/css files to public_html directory.
 
 ## Server api
 
-Add *.json files to api folder to create simple GET test apis.
-Add folders to create paths i.e. api\mycomments\comments.json will translate to localhost:3000/api/mycomments/comments 
+- Add *.json files to api folder to create simple GET test apis.
+- Add folders to create paths i.e. api\mycomments\comments.json will translate to localhost:3000/api/mycomments/comments 
 
 
