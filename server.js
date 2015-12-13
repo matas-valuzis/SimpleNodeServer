@@ -39,10 +39,17 @@ filesFromDir('./api', '.json', function(file){
 		fs.readFile(file, function(err, data) {
 			if (err) {
 			  console.error(err);
-			  process.exit(1);
+			  res.status(500).send(err);
+			  return;
 			}
-			res.setHeader('Cache-Control', 'no-cache');
-			res.json(JSON.parse(data));
+			try{
+				res.setHeader('Cache-Control', 'no-cache');
+				res.status(200).json(JSON.parse(data));
+			}
+			catch(err){
+				console.error(err);
+				res.status(500).send(err);
+			}
 		});
 	});	
 	
