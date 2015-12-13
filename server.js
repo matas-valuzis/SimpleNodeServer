@@ -51,8 +51,44 @@ filesFromDir('./api', '.json', function(file){
 				res.status(500).send(err);
 			}
 		});
-	});	
-	
+	});
+	app.post('/'+url, function(req, res) {
+		console.log("Post request at " + url + ":");
+		console.log(req.body);
+		var new_item = req.body;
+		fs.readFile(file, function(err, data) {
+			if (err) {
+			  console.error(err);
+			  res.status(500).send(err);
+			  return;
+			}
+			try{
+				var old_content = JSON.parse(data);
+			}
+			catch(err){
+				console.error(err);
+				res.status(500).send(err);
+				return;
+			}
+			var new_content;
+			
+			if (old_content instanceof Array){
+				old_content.push(new_item);
+				new_content = old_content;
+			}
+			else{
+				new_content = new_item;
+			}			
+			fs.writeFile(file, JSON.stringify(new_content), function(err){
+				if (err){
+					console.error(err);
+					res.status(500).send(err);
+					return;
+				}
+				res.status(200).send("OK");
+			});		
+		});		
+	});			
 });
 
 app.listen(app.get('port'), function() {
